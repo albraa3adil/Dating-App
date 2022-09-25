@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using DatingApp.API.Data;
 
 namespace DatingApp.API.Controllers;
 
+[Authorize]
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class WeatherForecastController : ControllerBase
 {
     // public WeatherForecastController(DataContext context)
@@ -33,6 +35,7 @@ public class WeatherForecastController : ControllerBase
         return Ok(values);
     }
 
+    [AllowAnonymous]
     [HttpGet("{id}")]
     public  async Task<IActionResult> GetValue(int id)
     {
